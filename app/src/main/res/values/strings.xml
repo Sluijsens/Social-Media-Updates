@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Social Media Updates</string>
+	
+	<!--Update page strings-->
+	<string name="update_linkedin_conn_single">has a new connection.</string>
+    <string name="update_linkedin_ccem">joined LinkedIn.</string>
+	
+	<!--Settings page-->
+    <string name="settings_linkedin">Connect to LinkedIn®</string>
+    <string name="settings_linkedin_connected">Connected as</string>
+    <string name="settings_twitter">Connect to Twitter</string>
+	<string name="settings_twitter_connected">Connected as</string>
+    <string name="settings_facebook">Connect to Facebook</string>
+	<string name="settings_facebook_connected">Connected as</string>
+    <string name="settings_googleplus">Connect to Google+</string>
+	<string name="settings_googleplus_connected">Connected as</string>
+	
+	<!--Menu items-->
+    <string name="action_accounts">Accounts</string>
+	
+	<!--Disconnect messages-->
+    <string name="dialog_disconnect_title">@string/app_name</string>
+    <string name="dialog_disconnect_message_linkedin">Are you sure you want to disconnect from LinkedIn?</string>
+	<string name="dialog_disconnect_message_facebook">Are you sure you want to disconnect from Facebook?</string>
+</resources>

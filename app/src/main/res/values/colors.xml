@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<resources>
+		<color name="dark_red">#6C383A</color>
+        <color name="light_grey">#dddddd</color>
+		<color name="background_color">#b2c0c2</color>
+		<color name="dark_grey">#474548</color>
+		<color name="dark_grey_hover">#585659</color>
+		<color name="brownish">#766e5a</color>
+		<color name="brown_grey">#8d928c</color>
+        <color name="linkedin_blue">#1d87bd</color>
+        <color name="facebook_blue">#3b579d</color>
+        <color name="twitter_blue">#55acee</color>
+        <color name="googleplus_red">#d73d32</color>
+	</resources>

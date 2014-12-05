@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="50dp"
+	android:background="@color/dark_red"
+	android:gravity="center_vertical">
+
+	<ImageView
+		android:layout_height="match_parent"
+		android:text="Text"
+		android:layout_width="wrap_content"
+		android:id="@+id/ImageView_ActionBar"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:src="@drawable/smu_logo"/>
+
+	<TextView
+		android:layout_height="match_parent"
+		android:text="@string/app_name"
+		android:layout_width="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:gravity="left|center_vertical"
+		android:layout_toRightOf="@id/ImageView_ActionBar"
+		android:id="@+id/actionbarTextView1"
+		android:paddingLeft="10dp"
+		android:paddingRight="10dp"
+		android:textColor="#FFFFFF"
+		android:textSize="15sp"/>
+
+	<ImageButton
+		android:layout_height="wrap_content"
+		android:text="Text"
+		android:layout_width="wrap_content"
+		android:id="@+id/ImageButton_ActionBar"
+		android:adjustViewBounds="true"
+		android:layout_alignParentRight="true"
+		android:src="@android:drawable/ic_menu_rotate"/>
+
+</RelativeLayout>
+

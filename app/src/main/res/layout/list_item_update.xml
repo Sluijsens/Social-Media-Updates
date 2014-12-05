@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:id="@+id/LinearLayout_PersonInfo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/dark_red"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:src="@android:drawable/ic_delete"
+            android:adjustViewBounds="true"
+            android:id="@+id/ImageView_UpdateProfilePicture"
+            android:layout_marginRight="10dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:text="Persons name"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:id="@+id/TextView_UpdateName"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:layout_width="wrap_content"
+                android:id="@+id/TextView_UpdateMessage"
+                android:linksClickable="true"
+                android:autoLink="all"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-light"
+                android:textColorLink="@drawable/link_color"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:id="@+id/ImageView_ServiceIcon"
+            android:src="@drawable/logo_facebook"
+            android:adjustViewBounds="true" />
+
+    </LinearLayout>
+
+    <nl.sluijsens.socialmediaupdate.ImageView16x9
+        android:layout_width="match_parent"
+        android:id="@+id/ImageView_ShareImage"
+        android:adjustViewBounds="true"
+        android:layout_height="50dp"
+        android:src="@android:drawable/screen_background_dark"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/LinearLayout_PersonInfo"
+        android:background="@drawable/imageview_background"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:clickable="true" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScrollView_Attachments"
+        android:fillViewport="true"
+        android:background="@drawable/background_red_padding8dp_shape"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayout_Attachments">
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout_UpdateShareContent"
+        android:background="@drawable/background_red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ImageView_ShareImage"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:textStyle="bold|italic"
+            android:id="@+id/TextView_LinkTitle"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_red_background"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:id="@+id/TextView_LinkDescription"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="italic"
+            android:textColor="@color/text_color_red_background"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+

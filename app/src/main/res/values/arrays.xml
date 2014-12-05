@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="social_media_services">
+        <item>linkedin</item>
+		<item>facebook</item>
+		<item>twitter</item>
+        <item>googleplus</item>
+    </string-array>
+</resources>
