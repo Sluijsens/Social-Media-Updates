@@ -1,9 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nl.bryan_slop.socialmediaupdates">
+    package="nl.bryan_slop.socialmediaupdates" >
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher" android:theme="@style/AppTheme">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <application
+        android:name=".SMU_Application"
+        android:allowBackup="true"
+        android:icon="@drawable/smu_logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".SMU_Activity_Splash"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SMU_Activity_Updates"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".SMU_Activity_Settings"
+            android:parentActivityName=".SMU_Activity_Updates" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SMU_Activity_Updates" />
+        </activity>
+        <activity
+            android:name=".SMU_Activity_CreateComment"
+            android:parentActivityName=".SMU_Activity_Updates" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SMU_Activity_Updates" />
+        </activity>
     </application>
 
 </manifest>

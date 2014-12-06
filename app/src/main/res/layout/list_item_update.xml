@@ -66,7 +66,7 @@
 
     </LinearLayout>
 
-    <nl.sluijsens.socialmediaupdate.ImageView16x9
+    <nl.bryan_slop.socialmediaupdates.ImageView16x9
         android:layout_width="match_parent"
         android:id="@+id/ImageView_ShareImage"
         android:adjustViewBounds="true"

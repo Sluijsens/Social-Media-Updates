@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <nl.sluijsens.socialmediaupdate.ImageView16x9
+    <nl.bryan_slop.socialmediaupdates.ImageView16x9
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ImageView_Attachment"
