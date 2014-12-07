@@ -23,6 +23,8 @@ import java.util.List;
 
 public class SMU_Activity_Settings extends SMU_Activity {
 
+    static TextView settingsTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class SMU_Activity_Settings extends SMU_Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView settingsTextView = (TextView) view.findViewById(R.id.TextView_Settings);
+                settingsTextView = (TextView) view.findViewById(R.id.TextView_Settings);
 
                 if(position == SERVICE_LINKEDIN) {
                     if (LINKEDIN_HAS_ACCESS_TOKEN) {
@@ -234,17 +236,12 @@ public class SMU_Activity_Settings extends SMU_Activity {
     }
 
     public static class SMU_AlertDialog extends DialogFragment {
-        final TextView settingsTextView;
 
-        public SMU_AlertDialog(TextView settingsTextView) {
-
-            this.settingsTextView = settingsTextView;
-
-        }
+        public SMU_AlertDialog() {}
 
         public static SMU_AlertDialog newInstance(String title, String message, int service, TextView settingsTextView) {
 
-            SMU_AlertDialog alertDialog = new SMU_AlertDialog(settingsTextView);
+            SMU_AlertDialog alertDialog = new SMU_AlertDialog();
             Bundle args = new Bundle();
             args.putString("title", title);
             args.putString("message", message);
@@ -261,7 +258,6 @@ public class SMU_Activity_Settings extends SMU_Activity {
             final String title = getArguments().getString("title");
             final String message = getArguments().getString("message");
             final int service = getArguments().getInt("service");
-            final TextView settingsTextView = this.settingsTextView;
 
             return new android.app.AlertDialog.Builder(getActivity())
                     .setIcon(android.R.drawable.ic_dialog_alert)

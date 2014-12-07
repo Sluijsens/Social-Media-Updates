@@ -20,6 +20,7 @@ public class SMU_Activity_Updates extends SMU_Activity {
     private List<UpdateMessage> updatesList = new ArrayList<UpdateMessage>();
     private UpdatesAdapter adapter;
     private ListView updatesListView;
+    private boolean refreshUpdates = false;
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -102,6 +103,10 @@ public class SMU_Activity_Updates extends SMU_Activity {
 
         // Reset the list with posts
         updatesList = new ArrayList<UpdateMessage>();
+        ((ArrayAdapter) updatesListView.getAdapter()).clear();
+
+        // Make sure we clear the list
+        refreshUpdates = true;
 
         // Load the posts
         loadPosts();
@@ -171,6 +176,7 @@ public class SMU_Activity_Updates extends SMU_Activity {
      * @param updateMessages The update messages to add to the List object.
      */
     public void setAllUpdates(HashMap<Long, UpdateMessage> updateMessages) {
+
         Map<Long, UpdateMessage> sortedMap = new TreeMap<Long, UpdateMessage>(updateMessages);
         List<UpdateMessage> tmpUpdatesList = new ArrayList<UpdateMessage>();
 
@@ -192,13 +198,14 @@ public class SMU_Activity_Updates extends SMU_Activity {
             }
         }
 
-        int position = updatesListView.getFirstVisiblePosition();
+//        int position = updatesListView.getFirstVisiblePosition();
         adapter = new UpdatesAdapter(this, R.layout.list_item_update, updatesList);
 
-        if(updatesListView.getAdapter() != null) {
+        if(updatesListView.getAdapter() == null || refreshUpdates == true) {
+            updatesListView.setAdapter(adapter);
             ((ArrayAdapter) updatesListView.getAdapter()).notifyDataSetChanged();
         } else {
-            updatesListView.setAdapter(adapter);
+            ((ArrayAdapter) updatesListView.getAdapter()).notifyDataSetChanged();
         }
 
 //        updatesListView.setSelection(adapter.getCount() - 1);
@@ -462,6 +469,9 @@ public class SMU_Activity_Updates extends SMU_Activity {
                     until = since;
                     since -= difference;
 
+                    if(refreshUpdates == true) {
+                        refreshUpdates = false;
+                    }
                     refreshLayout.setRefreshing(false);
                 }
             }

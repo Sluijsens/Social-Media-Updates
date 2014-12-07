@@ -123,7 +123,7 @@ abstract class OAuth2 {
 
         httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
         httpPost.setEntity(new UrlEncodedFormEntity(params));
-        //Log.d(DEBUG_TAG, "Address: " + url + " httppost: " + httpPost.getURI() + " httppost apiParams: " + apiParams.toString());
+//        Log.d(DEBUG_TAG, "Address: " + url + " httppost: " + httpPost.getURI() + " httppost apiParams: " + apiParams.toString());
         HttpResponse httpResponse = httpClient.execute(httpPost);
         HttpEntity httpEntity = httpResponse.getEntity();
 
@@ -139,7 +139,7 @@ abstract class OAuth2 {
     public InputStream sendHttpGetRequest(String apiRequest, List<NameValuePair> params) throws IOException {
 
         String url = getBaseApiURL() + apiRequest + "?" + URLEncodedUtils.format(params, null);
-        //Log.d(DEBUG_TAG, "API Request URL: " + url);
+//        Log.d(DEBUG_TAG, "API Request URL: " + url);
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
 
@@ -171,7 +171,7 @@ abstract class OAuth2 {
 
             params = prepareParams(ACTION_FETCH_DATA, params);
 
-            Log.d(DEBUG_TAG, "fetchData Params: " + params);
+//            Log.d(DEBUG_TAG, "fetchData Params: " + params);
 
             is = sendHttpGetRequest(apiRequest, params);
         } catch (Exception e) {
@@ -189,7 +189,7 @@ abstract class OAuth2 {
         try {
             //Log.d(DEBUG_TAG, "Result: " + result);
             json = new JSONObject(result);
-            Log.d(DEBUG_TAG, "JSON: " + json);
+//            Log.d(DEBUG_TAG, "JSON: " + json);
         } catch (Exception e) {
             Log.e(DEBUG_TAG, "Error converting result to JSON", e);
             return null;

@@ -67,7 +67,7 @@ public class ImageView16x9 extends ImageView {
 //            }
 //        }
 
-        Log.d("SMU On measure", "-> Width: " + width + ", Height: " + height + ", imgWidth: " + drawableWidth + ", imgHeight: " + drawableHeight);
+//        Log.d("SMU On measure", "-> Width: " + width + ", Height: " + height + ", imgWidth: " + drawableWidth + ", imgHeight: " + drawableHeight);
         // MUST CALL THIS
         setMeasuredDimension(width, height);
     }

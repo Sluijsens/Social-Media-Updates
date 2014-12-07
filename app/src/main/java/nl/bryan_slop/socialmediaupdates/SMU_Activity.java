@@ -242,7 +242,7 @@ public class SMU_Activity extends ActionBarActivity {
         WebView authWebView = (WebView) authDialog.findViewById(R.id.WebView_Authorize);
         authWebView.getSettings().setJavaScriptEnabled(true);
         authWebView.loadUrl(authURL);
-        Log.d(DEBUG_TAG, "Address WEBVIEW AUTHURL: " + authURL);
+//        Log.d(DEBUG_TAG, "Address WEBVIEW AUTHURL: " + authURL);
 //        String test = "http://localhost/?access_token=CAAKEQaJnsCgBAIwulfZClzquRrUQKYIc8wZBpxISHB9lZB5dhK1pKZCiGvzJSsGVmfbZBm8aUqrOSZBkeZBj1cdMKW3yEhMOuSPmoGxAVdDnS7suGIvjq0fmf5pp9tYPdTLlEBHm3Gb6eAtZCL02EHSlTSr1VX7EnbZBWjaWbZCuvNqzxA1qKjPvDREtG7JJiBk4bceCmZCQORy0a1WXbfxHaZB3&expires=5139895";
 //        String accessToken = null;
 //        String expiresIn = null;
@@ -266,7 +266,7 @@ public class SMU_Activity extends ActionBarActivity {
 
             @Override
             public void onPageFinished(WebView webView, String url) {
-                //Log.d(DEBUG_TAG, "Address Response url: " + url);
+//                Log.d(DEBUG_TAG, "Address Response url: " + url);
 
                 if(url.contains("?code=")) {
 
@@ -294,7 +294,7 @@ public class SMU_Activity extends ActionBarActivity {
                             JSONObject result = getAccessToken.get();
                             saveAccessToken(service, result);
 
-                            Log.d(DEBUG_TAG, "Result json: " + result);
+//                            Log.d(DEBUG_TAG, "Result json: " + result);
                         } catch (Exception e) {
                             Log.e(DEBUG_TAG, "Error retrieving/saving JSON Result from AsyncTask!", e);
                         }
@@ -368,7 +368,7 @@ public class SMU_Activity extends ActionBarActivity {
                         apiCall.execute(SERVICE_LINKEDIN, "/v1/people/~:(first-name,last-name)");
                         JSONObject json = apiCall.get();
 
-                        Log.d(DEBUG_TAG, "Get Name json: " + json);
+//                        Log.d(DEBUG_TAG, "Get Name json: " + json);
 
                         fullName = json.getString("firstName") + " " + json.getString("lastName");
                     } catch (Exception e) {
@@ -388,7 +388,7 @@ public class SMU_Activity extends ActionBarActivity {
                     ((LinearLayout)textView.getParent().getParent()).setBackgroundResource(R.drawable.background_light_grey);
                 }
             }
-            Log.d(DEBUG_TAG, "Expires " + mOAuth2.getLong(OAUTH2_SETTINGS_ACCESS_TOKEN_EXPIRES_LINKEDIN, 0) + " <> " + timeInSeconds + " timeInSeconds");
+//            Log.d(DEBUG_TAG, "Expires " + mOAuth2.getLong(OAUTH2_SETTINGS_ACCESS_TOKEN_EXPIRES_LINKEDIN, 0) + " <> " + timeInSeconds + " timeInSeconds");
         } else if(service == SERVICE_FACEBOOK) {
 
             if (FACEBOOK_HAS_ACCESS_TOKEN) {
@@ -406,7 +406,7 @@ public class SMU_Activity extends ActionBarActivity {
                         JSONObject json = apiCall.get();
 
                         fullName = json.getString("name");
-                        Log.d(DEBUG_TAG, "json: " + json);
+//                        Log.d(DEBUG_TAG, "json: " + json);
                     } catch (Exception e) {
                         Log.e(DEBUG_TAG, "Failed to do api request.", e);
                     }
@@ -424,7 +424,7 @@ public class SMU_Activity extends ActionBarActivity {
                     ((LinearLayout)textView.getParent().getParent()).setBackgroundResource(R.drawable.background_light_grey);
                 }
             }
-            Log.d(DEBUG_TAG, "Expires " + mOAuth2.getLong(OAUTH2_SETTINGS_ACCESS_TOKEN_EXPIRES_FACEBOOK, 0) + " <> " + timeInSeconds + " timeInSeconds");
+//            Log.d(DEBUG_TAG, "Expires " + mOAuth2.getLong(OAUTH2_SETTINGS_ACCESS_TOKEN_EXPIRES_FACEBOOK, 0) + " <> " + timeInSeconds + " timeInSeconds");
         }
 
     }
@@ -440,7 +440,7 @@ public class SMU_Activity extends ActionBarActivity {
         Time time = new Time();
         time.setToNow();
         Editor editor = mOAuth2.edit();
-        Log.d(DEBUG_TAG, "Current time (sec): " + (time.toMillis(false) / 1000));
+//        Log.d(DEBUG_TAG, "Current time (sec): " + (time.toMillis(false) / 1000));
 
         if(positionService == SERVICE_LINKEDIN) {
             editor.putString(OAUTH2_SETTINGS_ACCESS_TOKEN_LINKEDIN, result.getString("access_token"));
@@ -450,7 +450,7 @@ public class SMU_Activity extends ActionBarActivity {
             editor.putLong(OAUTH2_SETTINGS_ACCESS_TOKEN_EXPIRES_FACEBOOK, (result.getLong("expires_in") + (time.toMillis(false) / 1000) - (60 * 60 * 24 * 10)));
 		}
         editor.commit();
-        Log.d(DEBUG_TAG, "AccessToken: " + mOAuth2.getString(OAUTH2_SETTINGS_ACCESS_TOKEN_FACEBOOK, "No Token"));
+//        Log.d(DEBUG_TAG, "AccessToken: " + mOAuth2.getString(OAUTH2_SETTINGS_ACCESS_TOKEN_FACEBOOK, "No Token"));
     }
 	
 	private void clearReferences(){
@@ -466,7 +466,7 @@ public class SMU_Activity extends ActionBarActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    class RetainFragment extends Fragment {
+    public static class RetainFragment extends Fragment {
 
         // ImageLoader we want to retain
         private ImageLoader imageLoader;
@@ -507,7 +507,7 @@ public class SMU_Activity extends ActionBarActivity {
             }
 
             if(service == SERVICE_LINKEDIN) {
-               Log.d(DEBUG_TAG, "Linkedin test");
+//               Log.d(DEBUG_TAG, "Linkedin test");
                 try {
                     json = new JSONObject(linkedInOAuth2.getAccessToken(authCode));
                 } catch (Exception e) {

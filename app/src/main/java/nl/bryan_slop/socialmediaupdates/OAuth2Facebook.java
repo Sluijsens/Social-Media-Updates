@@ -179,7 +179,7 @@ public class OAuth2Facebook extends OAuth2 {
                 // Create the UpdateMessage object and add it to the HashMap with update messages
                 updateMessage = new UpdateMessage(SMU_Activity.SERVICE_FACEBOOK, timestamp, updateData);
 
-                Log.d(DEBUG_TAG, "JSON msg: " + updateMessage.getMessage());
+//                Log.d(DEBUG_TAG, "JSON msg: " + updateMessage.getMessage());
 
                 if (json.getString("type").equalsIgnoreCase("photo") && !json.getString("status_type").equalsIgnoreCase("added_photos")) {
                     try {
@@ -201,7 +201,7 @@ public class OAuth2Facebook extends OAuth2 {
                         updateMessage.setAttachments(arrayAttachments);
 
                     } catch (JSONException e) {
-                        Log.d(DEBUG_TAG, "Facebook ► No attachments found");
+//                        Log.d(DEBUG_TAG, "Facebook ► No attachments found");
                     }
                 }
 
@@ -210,7 +210,7 @@ public class OAuth2Facebook extends OAuth2 {
                 }
             }
             // Debug message
-            //Log.d(DEBUG_TAG, "Facebook Updates ► " + facebookUpdates);
+//            Log.d(DEBUG_TAG, "Facebook Updates ► " + facebookUpdates);
         } catch(Exception e) {
             Log.e(DEBUG_TAG, "Facebook ► No facebook updates found. (data entry empty?)", e);
         }
@@ -283,9 +283,9 @@ public class OAuth2Facebook extends OAuth2 {
 
             HttpEntity httpEntity = httpResponse.getEntity();
             String result = convertResultToString(httpEntity.getContent());
-            Log.d(DEBUG_TAG, "Result Facebook Comment: " + result + "\n" +
-                    "access token: " + OAuthAT + "\n" +
-                    "URL: " + url);
+//            Log.d(DEBUG_TAG, "Result Facebook Comment: " + result + "\n" +
+//                    "access token: " + OAuthAT + "\n" +
+//                    "URL: " + url);
         } catch (Exception e) {
             Log.e(DEBUG_TAG, "Something went wrong creating a facebook comment!", e);
         }

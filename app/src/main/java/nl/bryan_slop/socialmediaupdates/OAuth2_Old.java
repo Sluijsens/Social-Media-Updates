@@ -147,7 +147,7 @@ public class OAuth2_Old {
 
         httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
         httpPost.setEntity(new UrlEncodedFormEntity(params));
-        Log.d(DEBUG_TAG, "Address: " + address + " httppost: " + httpPost.getURI() + " httppost apiParams: " + httpPost.getParams());
+//        Log.d(DEBUG_TAG, "Address: " + address + " httppost: " + httpPost.getURI() + " httppost apiParams: " + httpPost.getParams());
         HttpResponse httpResponse = httpClient.execute(httpPost);
         HttpEntity httpEntity = httpResponse.getEntity();
 
@@ -177,7 +177,7 @@ public class OAuth2_Old {
         }
 
         String url = getBaseApiURL() + apiRequest + "?" + URLEncodedUtils.format(params, null);
-        //Log.d(DEBUG_TAG, "API Request URL: " + url);
+//        Log.d(DEBUG_TAG, "API Request URL: " + url);
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
 
@@ -281,8 +281,8 @@ public class OAuth2_Old {
 
             HttpEntity httpEntity = httpResponse.getEntity();
             String result = convertResultToString(httpEntity.getContent());
-            Log.d(DEBUG_TAG, "Result Linkedin Comment: " + result + "\n" +
-                    "access token: " + OAuthAT);
+//            Log.d(DEBUG_TAG, "Result Linkedin Comment: " + result + "\n" +
+//                    "access token: " + OAuthAT);
         } catch (Exception e) {
             Log.e(DEBUG_TAG, "Something went wrong creating a linkedin comment!", e);
         }
@@ -306,9 +306,9 @@ public class OAuth2_Old {
 
             HttpEntity httpEntity = httpResponse.getEntity();
             String result = convertResultToString(httpEntity.getContent());
-            Log.d(DEBUG_TAG, "Result Facebook Comment: " + result + "\n" +
-                    "access token: " + OAuthAT + "\n" +
-                    "URL: " + url);
+//            Log.d(DEBUG_TAG, "Result Facebook Comment: " + result + "\n" +
+//                    "access token: " + OAuthAT + "\n" +
+//                    "URL: " + url);
         } catch (Exception e) {
             Log.e(DEBUG_TAG, "Something went wrong creating a facebook comment!", e);
         }

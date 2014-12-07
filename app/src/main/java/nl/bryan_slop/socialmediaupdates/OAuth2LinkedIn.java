@@ -152,7 +152,7 @@ public class OAuth2LinkedIn extends OAuth2 {
                         // Create the UpdateMessage object and add it to the HashMap with update messages
                         updateMessage = new UpdateMessage(SMU_Activity.SERVICE_LINKEDIN, timestamp, updateData);
 
-                        Log.d(DEBUG_TAG, "JSON msg: " + updateMessage.getMessage());
+//                        Log.d(DEBUG_TAG, "JSON msg: " + updateMessage.getMessage());
 
                         if(isGoodUpdateMessage(updateMessage)) {
                             updateMessages.put(timestamp, updateMessage);
@@ -200,7 +200,7 @@ public class OAuth2LinkedIn extends OAuth2 {
             params.add(startParam);
 
             JSONObject linkedInUpdates = fetchData(request, params);
-            Log.d(DEBUG_TAG, "updates linkedin: " + linkedInUpdates);
+//            Log.d(DEBUG_TAG, "updates linkedin: " + linkedInUpdates);
             try {
                 JSONArray tmpJsonArray = linkedInUpdates.getJSONArray("values");
 
@@ -246,8 +246,8 @@ public class OAuth2LinkedIn extends OAuth2 {
 
             HttpEntity httpEntity = httpResponse.getEntity();
             String result = convertResultToString(httpEntity.getContent());
-            Log.d(DEBUG_TAG, "Result Linkedin Comment: " + result + "\n" +
-                    "access token: " + OAuthAT);
+//            Log.d(DEBUG_TAG, "Result Linkedin Comment: " + result + "\n" +
+//                    "access token: " + OAuthAT);
         } catch (Exception e) {
             Log.e(DEBUG_TAG, "Something went wrong creating a linkedin comment!", e);
         }
