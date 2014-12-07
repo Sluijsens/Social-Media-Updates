@@ -17,11 +17,9 @@ import org.apache.http.message.*;
 import android.os.*;
 
 public class SMU_Activity_Updates extends SMU_Activity {
-    int updatetaskcount = 1;
     private List<UpdateMessage> updatesList = new ArrayList<UpdateMessage>();
     private UpdatesAdapter adapter;
     private ListView updatesListView;
-    private HashMap<Long, UpdateMessage> updateMessages = new HashMap<Long, UpdateMessage>();
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -29,7 +27,7 @@ public class SMU_Activity_Updates extends SMU_Activity {
     public VideoView videoViewExpanded;
 
     // Define the difference between since and until in minutes.
-    private final int TIME_IN_MINUTES = 30;
+    private final int TIME_IN_MINUTES = 120;
     private final int difference = TIME_IN_MINUTES * 60 * 1000;
 
     // From when to when do you want posts to be loaded.
@@ -103,7 +101,6 @@ public class SMU_Activity_Updates extends SMU_Activity {
         since = until - difference;
 
         // Reset the list with posts
-        updateMessages = new HashMap<Long, UpdateMessage>();
         updatesList = new ArrayList<UpdateMessage>();
 
         // Load the posts
@@ -112,8 +109,6 @@ public class SMU_Activity_Updates extends SMU_Activity {
     }
 
     public void loadPosts() {
-//        updateMessages = new HashMap<Long, UpdateMessage>();
-//        updatesList = new ArrayList<UpdateMessage>();
         UpdatesTask updatesTask = new UpdatesTask(updatesListView);
         updatesTask.execute();
     }
@@ -177,21 +172,26 @@ public class SMU_Activity_Updates extends SMU_Activity {
      */
     public void setAllUpdates(HashMap<Long, UpdateMessage> updateMessages) {
         Map<Long, UpdateMessage> sortedMap = new TreeMap<Long, UpdateMessage>(updateMessages);
+        List<UpdateMessage> tmpUpdatesList = new ArrayList<UpdateMessage>();
 
         Set set = sortedMap.entrySet();
         Iterator iterator = set.iterator();
-        if( updatesList.size() > 0) {
-            Collections.reverse(updatesList);
-        }
         while(iterator.hasNext()) {
             Map.Entry me = (Map.Entry) iterator.next();
             UpdateMessage um = (UpdateMessage) me.getValue();
 
+            if(!tmpUpdatesList.contains(um)) {
+                tmpUpdatesList.add(um);
+            }
+        }
+        Collections.reverse(tmpUpdatesList);
+
+        for(UpdateMessage um : tmpUpdatesList) {
             if(!updatesList.contains(um)) {
                 updatesList.add(um);
             }
         }
-        Collections.reverse(updatesList);
+
         int position = updatesListView.getFirstVisiblePosition();
         adapter = new UpdatesAdapter(this, R.layout.list_item_update, updatesList);
 
@@ -202,7 +202,7 @@ public class SMU_Activity_Updates extends SMU_Activity {
         }
 
 //        updatesListView.setSelection(adapter.getCount() - 1);
-        updatesListView.setSelection(position);
+//        updatesListView.setSelection(position);
     }
 
     /**
@@ -421,121 +421,15 @@ public class SMU_Activity_Updates extends SMU_Activity {
             }
             return false;
         }
-
-        /**
-         * A class that adds the new connection made on LinkedIn to a ListView
-         */
-//		private class ConnectionUpdateAdapter extends ArrayAdapter {
-//            final int service;
-//			//private Context context;
-//			private List<JSONObject> values;
-//
-//			public ConnectionUpdateAdapter(Context context, int service, List<JSONObject> values) {
-//				super(context, R.layout.list_item_linkedin_connection, values);
-//				//this.context = context;
-//				this.values = values;
-//                this.service = service;
-//			}
-//
-//			@Override
-//			public View getView(int position, View convertView, ViewGroup parent) {
-//				LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//				View rowView = inflater.inflate(R.layout.list_item_linkedin_connection, parent, false);
-//                JSONObject person = values.get(position);
-//
-//                if(SERVICE_LINKEDIN == this.service) {
-//                    //Log.d(DEBUG_TAG, "JSON Person: " + person);
-//                    try {
-//                        String id = person.getString("id");
-//
-//                        ImageView profilePicImageView = (ImageView) rowView.findViewById(R.id.ImageView_ConnectionProfilePic);
-//                        if(profileImages.containsKey(id)) {
-//                            profilePicImageView.setImageBitmap(profileImages.get(id));
-//                        } else {
-////                            LoadProfilePicture image = new LoadProfilePicture(profilePicImageView, SERVICE_LINKEDIN);
-////                            image.execute(id);
-//                        }
-//
-//                        TextView connectionName = (TextView) rowView.findViewById(R.id.TextView_ConnectionName);
-//                        connectionName.setText(person.getString("firstName") + " " + person.getString("lastName"));
-//
-//                        TextView connectionHeadline = (TextView) rowView.findViewById(R.id.TextView_ConnectionHeadline);
-//                        connectionHeadline.setText(person.getString("headline"));
-//                    } catch (Exception e) {
-//
-//                    }
-//                }
-//				return rowView;
-//			}
-//		}
 	}
-
-    /**
-     * A class handling the task to get the profile pictures from the web and add them to the update message it belongs to.
-     */
-//	private class LoadProfilePicture extends AsyncTask<String, Object, Drawable> {
-//		final int service;
-//        final WeakReference<ImageView> imageViewReference;
-//
-//		public LoadProfilePicture(ImageView imageView, int service) {
-//			this.service = service;
-//            this.imageViewReference = new WeakReference<ImageView>(imageView);
-//        }
-//
-//		@Override
-//		protected Drawable doInBackground(String[] apiParams) {
-//            Drawable drawable;
-//            String id = apiParams[0];
-//
-//            if(SERVICE_LINKEDIN == service) {
-//                try {
-//                    JSONObject jsonImage = linkedInOAuth2.fetchData("/v1/people/id=" + id + ":(picture-url)");
-//                    String url = jsonImage.getString("pictureUrl");
-//                    drawable = loadImageFromWeb(url, id);
-//                } catch (JSONException e) {
-//                    drawable = new ColorDrawable(getResources().getColor(android.R.color.black));
-//                }
-//            } else if(SERVICE_FACEBOOK == service) {
-//
-//                try {
-//                    int pictureWidth = calculatePixels(75);
-//                    int pictureHeight = pictureWidth;
-//                    List<NameValuePair> apiParams = new ArrayList<NameValuePair>();
-//                    apiParams.add(new BasicNameValuePair("redirect", "false"));
-//                    apiParams.add(new BasicNameValuePair("width", String.valueOf(pictureWidth)));
-//                    apiParams.add(new BasicNameValuePair("height", String.valueOf(pictureHeight)));
-//                    JSONObject jsonImage = facebookOAuth2.fetchData("/" + id + "/picture", apiParams);
-//                    String url = jsonImage.getJSONObject("data").getString("url");
-//                    drawable = loadImageFromWeb(url, id);
-//                    //Log.d(DEBUG_TAG, "NO JSON ERROR id: " + id + ", url: " + url);
-//                } catch(Exception e) {
-//                    drawable = new ColorDrawable(getResources().getColor(android.R.color.black));
-//                }
-//            } else {
-//                //Log.d(DEBUG_TAG, "NO SERVICE: " + service);
-//                drawable = new ColorDrawable(getResources().getColor(android.R.color.black));
-//            }
-//
-//			return drawable;
-//		}
-//
-//        @Override
-//        protected void onPostExecute(Drawable drawable) {
-//            if(drawable != null && imageViewReference != null) {
-//                ImageView imageView = imageViewReference.get();
-//                if(imageView != null) {
-//                	imageView.setImageDrawable(drawable);
-//                }
-//            }
-//        }
-//
-//	}
 
     private class UpdatesTask extends AsyncTask<Object, String, JSONObject> {
         final WeakReference<ListView> listViewReference;
+        HashMap<Long, UpdateMessage> updateMessages;
 
         public UpdatesTask(ListView listView) {
             this.listViewReference = new WeakReference<ListView>(listView);
+            updateMessages = new HashMap<Long, UpdateMessage>();
         }
 
         @Override
@@ -554,9 +448,6 @@ public class SMU_Activity_Updates extends SMU_Activity {
         @Override
         protected void onPreExecute() {
             if(refreshLayout != null) {
-//                updateMessages = new HashMap<Long, UpdateMessage>();
-//                updatesList = new ArrayList<UpdateMessage>();
-
                 refreshLayout.setRefreshing(true);
             }
         }
@@ -567,11 +458,6 @@ public class SMU_Activity_Updates extends SMU_Activity {
                 ListView listView = listViewReference.get();
                 if(listView != null) {
                     setAllUpdates(updateMessages);
-                    Log.d(DEBUG_TAG, "Updatetasks count: " + updatetaskcount + "\nUpdatesList count: " + updatesList.size() );
-//                    updatesList = new ArrayList<UpdateMessage>();
-
-                    Log.d(DEBUG_TAG, "Updatetasks count: " + updatetaskcount + "\nUpdatesList count: " + updatesList.size() );
-                    updatetaskcount++;
 
                     until = since;
                     since -= difference;
