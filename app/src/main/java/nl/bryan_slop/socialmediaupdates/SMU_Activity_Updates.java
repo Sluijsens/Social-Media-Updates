@@ -63,9 +63,9 @@ public class SMU_Activity_Updates extends SMU_Activity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(SMU_Application.getContext(),
-                        "Refreshing",
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(SMU_Application.getContext(),
+//                        "Refreshing",
+//                        Toast.LENGTH_LONG).show();
 
                 refreshPosts();
             }
