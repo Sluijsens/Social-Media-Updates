@@ -3,7 +3,6 @@ package nl.bryan_slop.socialmediaupdates;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.widget.*;
 
 import java.lang.ref.WeakReference;
@@ -28,7 +27,7 @@ public class SMU_Activity_Updates extends SMU_Activity {
     public VideoView videoViewExpanded;
 
     // Define the difference between since and until in minutes.
-    private final int TIME_IN_MINUTES = 120;
+    private final int TIME_IN_MINUTES = 60;
     private final int difference = TIME_IN_MINUTES * 60 * 1000;
 
     // From when to when do you want posts to be loaded.
@@ -40,59 +39,74 @@ public class SMU_Activity_Updates extends SMU_Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.updates);
 
-        imageViewExpanded = (ImageView) findViewById(R.id.ImageView_ExpandedImage);
-        imageViewExpanded.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismissExpandedImage();
-            }
-        });
-
-        videoViewExpanded = (VideoView) findViewById(R.id.VideoView_ShareVideo);
-        videoViewExpanded.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismissExpandedVideo();
-            }
-        });
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(videoViewExpanded);
-        videoViewExpanded.setMediaController(mediaController);
-
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.SwipeRefreshLayout_Updates);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-//                Toast.makeText(SMU_Application.getContext(),
-//                        "Refreshing",
-//                        Toast.LENGTH_LONG).show();
+        videoViewExpanded = (VideoView) findViewById(R.id.VideoView_ShareVideo);
+        imageViewExpanded = (ImageView) findViewById(R.id.ImageView_ExpandedImage);
 
-                refreshPosts();
-            }
-        });
-        refreshLayout.setColorScheme(R.color.linkedin_blue, R.color.facebook_blue,
-                R.color.twitter_blue, R.color.googleplus_red);
+        if(hasAnyService()) {
+            LinearLayout noServicesLinearLayout = (LinearLayout) findViewById(R.id.LinearLayout_NoServices);
+            noServicesLinearLayout.setVisibility(View.GONE);
 
-        updatesListView = (ListView) findViewById(R.id.ListView_Updates);
-        updatesListView.setOnScrollListener(new AbsListView.OnScrollListener(){
+            imageViewExpanded.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismissExpandedImage();
+                }
+            });
 
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            videoViewExpanded.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismissExpandedVideo();
+                }
+            });
+            MediaController mediaController = new MediaController(this);
+            mediaController.setAnchorView(videoViewExpanded);
+            videoViewExpanded.setMediaController(mediaController);
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
+            refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    refreshPosts();
+                }
+            });
+            refreshLayout.setColorSchemeResources(R.color.linkedin_blue,
+                    R.color.facebook_blue,
+                    R.color.twitter_blue,
+                    R.color.googleplus_red);
 
-                int lastInScreen = firstVisibleItem + visibleItemCount;
-                if(lastInScreen == totalItemCount){
-                    if(!refreshLayout.isRefreshing()) {
-                        loadPosts();
+            updatesListView = (ListView) findViewById(R.id.ListView_Updates);
+            updatesListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                }
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem,
+                                     int visibleItemCount, int totalItemCount) {
+
+                    int lastInScreen = firstVisibleItem + visibleItemCount;
+                    if (lastInScreen >= totalItemCount - 1) {
+                        if (!refreshLayout.isRefreshing()) {
+                            loadPosts();
+                        }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            refreshLayout.setVisibility(View.GONE);
+            videoViewExpanded.setVisibility(View.GONE);
+            imageViewExpanded.setVisibility(View.GONE);
 
-//        loadPosts();
+            Button buttonToSettings = (Button) findViewById(R.id.Button_ToSettings);
+            buttonToSettings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openSettingsPage();
+                }
+            });
+        }
     }
 
     public void refreshPosts() {
@@ -473,6 +487,10 @@ public class SMU_Activity_Updates extends SMU_Activity {
                         refreshUpdates = false;
                     }
                     refreshLayout.setRefreshing(false);
+                    ProgressBar progressBarBeforeUpdates = (ProgressBar) findViewById(R.id.ProgressBar_BeforeUpdates);
+                    if(progressBarBeforeUpdates.getVisibility() != View.GONE) {
+                        progressBarBeforeUpdates.setVisibility(View.GONE);
+                    }
                 }
             }
         }

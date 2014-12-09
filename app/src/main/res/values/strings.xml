@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Social Media Updates</string>
-	
+
+    <!-- General strings -->
+    <string name="general_no_services">You have not logged in on any service.</string>
+    <string name="general_login">Log in</string>
+
 	<!--Update page strings-->
 	<string name="update_linkedin_conn_single">has a new connection.</string>
     <string name="update_linkedin_ccem">joined LinkedIn.</string>
@@ -22,5 +26,7 @@
 	<!--Disconnect messages-->
     <string name="dialog_disconnect_title">@string/app_name</string>
     <string name="dialog_disconnect_message_linkedin">Are you sure you want to disconnect from LinkedIn?</string>
-	<string name="dialog_disconnect_message_facebook">Are you sure you want to disconnect from Facebook?</string>
+    <string name="dialog_disconnect_message_facebook">Are you sure you want to disconnect from Facebook?</string>
+    <string name="dialog_disconnect_message_twitter">Are you sure you want to disconnect from Twitter?</string>
+    <string name="dialog_disconnect_message_googleplus">Are you sure you want to disconnect from Google+?</string>
 </resources>

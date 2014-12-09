@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
+    <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/SwipeRefreshLayout_Updates"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -35,5 +35,37 @@
             android:visibility="invisible"
             android:background="@android:color/black"
             android:layout_centerInParent="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProgressBar_BeforeUpdates"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/LinearLayout_NoServices" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/general_no_services"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/general_login"
+            android:id="@+id/Button_ToSettings"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="false" />
+
+    </LinearLayout>
 
 </RelativeLayout>

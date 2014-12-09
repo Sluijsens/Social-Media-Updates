@@ -168,13 +168,17 @@ public class SMU_Activity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-			startActivity(new Intent(getApplicationContext(), SMU_Activity_Settings.class));
+			openSettingsPage();
             return true;
         } else if(id == R.id.action_create_comment) {
             startActivity(new Intent(getApplicationContext(), SMU_Activity_CreateComment.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openSettingsPage() {
+        startActivity(new Intent(getApplicationContext(), SMU_Activity_Settings.class));
     }
 
     public static Integer[] getDisplaySizes() {
@@ -342,6 +346,16 @@ public class SMU_Activity extends ActionBarActivity {
                 FACEBOOK_HAS_ACCESS_TOKEN = false;
             }
         }
+    }
+
+    public boolean hasAnyService() {
+
+        if(FACEBOOK_HAS_ACCESS_TOKEN || LINKEDIN_HAS_ACCESS_TOKEN || TWITTER_HAS_ACCESS_TOKEN ||
+                GOOGLEPLUS_HAS_ACCESS_TOKEN) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

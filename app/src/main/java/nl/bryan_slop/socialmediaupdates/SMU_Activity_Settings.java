@@ -30,7 +30,7 @@ public class SMU_Activity_Settings extends SMU_Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        Log.d(DEBUG_TAG, "AccessToken: " + mOAuth2.getString(OAUTH2_SETTINGS_ACCESS_TOKEN_LINKEDIN, "No Token"));
+        //Log.d(DEBUG_TAG, "AccessToken: " + mOAuth2.getString(OAUTH2_SETTINGS_ACCESS_TOKEN_LINKEDIN, "No Token"));
 
         final String[] socialMediaServices = getResources().getStringArray(R.array.social_media_services);
 
@@ -112,7 +112,6 @@ public class SMU_Activity_Settings extends SMU_Activity {
             String settingsText = null;
             String userName = null;
 
-            String service = values[position];
             if(position == SERVICE_LINKEDIN) {
                 icon = getResources().getDrawable(R.drawable.logo_linkedin);
                 settingsText = getResources().getString(R.string.settings_linkedin);
@@ -129,6 +128,7 @@ public class SMU_Activity_Settings extends SMU_Activity {
                         settingsTextView.setTextColor(getResources().getColorStateList(R.color.text_color_red_background));
                     } catch (Exception e) {
                         Log.e(DEBUG_TAG, "LinkedIn: Failed to do api request.", e);
+                        LINKEDIN_HAS_ACCESS_TOKEN = false;
                     }
 
                 }
@@ -151,6 +151,7 @@ public class SMU_Activity_Settings extends SMU_Activity {
                         settingsTextView.setTextColor(getResources().getColorStateList(R.color.text_color_red_background));
                     } catch (Exception e) {
                         Log.e(DEBUG_TAG, "Facebook: Failed to do api request.", e);
+                        FACEBOOK_HAS_ACCESS_TOKEN = false;
                     }
 
                 }
