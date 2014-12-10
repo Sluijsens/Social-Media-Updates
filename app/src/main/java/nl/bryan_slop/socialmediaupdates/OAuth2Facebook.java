@@ -41,7 +41,7 @@ public class OAuth2Facebook extends OAuth2 {
             data.put("service", "Facebook");
             data.put("clientId", "708367385866280");
             data.put("clientSecret", "c16ad051bf44b421a04ed35e259eab76");
-            data.put("scope", "read_stream public_profile user_status user_photos user_videos publish_actions");
+            data.put("scope", "read_stream public_profile user_photos user_videos publish_actions");
             data.put("baseApiURL", "https://graph.facebook.com/v2.1");
             data.put("baseAuthURL", "https://www.facebook.com/dialog/oauth");
             data.put("baseAccessURL", "https://graph.facebook.com/oauth/access_token");
