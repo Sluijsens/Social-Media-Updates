@@ -168,7 +168,7 @@ public class SMU_Activity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-			openSettingsPage();
+			goToSettingsPage();
             return true;
         } else if(id == R.id.action_create_comment) {
             startActivity(new Intent(getApplicationContext(), SMU_Activity_CreateComment.class));
@@ -177,7 +177,7 @@ public class SMU_Activity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void openSettingsPage() {
+    public void goToSettingsPage() {
         startActivity(new Intent(getApplicationContext(), SMU_Activity_Settings.class));
     }
 

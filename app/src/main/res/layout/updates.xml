@@ -47,7 +47,8 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/LinearLayout_NoServices" >
+        android:id="@+id/LinearLayout_NoServices"
+        android:gravity="center_vertical|center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"

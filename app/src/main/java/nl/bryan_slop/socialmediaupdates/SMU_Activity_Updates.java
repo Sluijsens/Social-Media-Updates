@@ -98,12 +98,14 @@ public class SMU_Activity_Updates extends SMU_Activity {
             refreshLayout.setVisibility(View.GONE);
             videoViewExpanded.setVisibility(View.GONE);
             imageViewExpanded.setVisibility(View.GONE);
+            ProgressBar progressBarBeforeUpdates = (ProgressBar) findViewById(R.id.ProgressBar_BeforeUpdates);
+            progressBarBeforeUpdates.setVisibility(View.GONE);
 
             Button buttonToSettings = (Button) findViewById(R.id.Button_ToSettings);
             buttonToSettings.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openSettingsPage();
+                    goToSettingsPage();
                 }
             });
         }

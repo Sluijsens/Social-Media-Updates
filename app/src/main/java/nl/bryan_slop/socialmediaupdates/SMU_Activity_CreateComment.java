@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,83 +28,99 @@ public class SMU_Activity_CreateComment extends SMU_Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_comment);
 
-        EditText editTextComment = (EditText) findViewById(R.id.EditView_CreateComment);
-        final String[] socialMediaServices = getResources().getStringArray(R.array.social_media_services);
+        if(hasAnyService()) {
+            LinearLayout linearLayoutNoServices = (LinearLayout) findViewById(R.id.LinearLayout_NoServicesCreateComment);
+            linearLayoutNoServices.setVisibility(View.GONE);
 
-        for(int position = 0; position < socialMediaServices.length; position++) {
-            LinearLayout linearLayoutCreateCommentIcons = (LinearLayout) findViewById(R.id.LinearLayout_CreateCommentIcons);
+            EditText editTextComment = (EditText) findViewById(R.id.EditView_CreateComment);
+            final String[] socialMediaServices = getResources().getStringArray(R.array.social_media_services);
 
-            final ImageView imageIcon = new ImageView(this);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            lp.height = calculatePixels(50);
-            lp.width = lp.height;
-            lp.setMargins(0, 0, calculatePixels(8), 0);
+            for (int position = 0; position < socialMediaServices.length; position++) {
+                LinearLayout linearLayoutCreateCommentIcons = (LinearLayout) findViewById(R.id.LinearLayout_CreateCommentIcons);
 
-            imageIcon.setLayoutParams(lp);
-            imageIcon.setRight(calculatePixels(8));
+                final ImageView imageIcon = new ImageView(this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                lp.height = calculatePixels(50);
+                lp.width = lp.height;
+                lp.setMargins(0, 0, calculatePixels(8), 0);
 
-            if(position == SERVICE_LINKEDIN) {
-                if (LINKEDIN_HAS_ACCESS_TOKEN) {
-                    imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_linkedin));
-                    toggleService(SERVICE_LINKEDIN, imageIcon);
-                } else {
-                    imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_linkedin_grey));
-                }
-                imageIcon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                imageIcon.setLayoutParams(lp);
+                imageIcon.setRight(calculatePixels(8));
+
+                if (position == SERVICE_LINKEDIN) {
+                    if (LINKEDIN_HAS_ACCESS_TOKEN) {
+                        imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_linkedin));
                         toggleService(SERVICE_LINKEDIN, imageIcon);
+                    } else {
+                        imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_linkedin_grey));
                     }
-                });
-            } else if(position == SERVICE_FACEBOOK) {
-                if (FACEBOOK_HAS_ACCESS_TOKEN) {
-                    toggleService(SERVICE_FACEBOOK, imageIcon);
-                } else {
-                    imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_facebook_grey));
-                }
-                imageIcon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    imageIcon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toggleService(SERVICE_LINKEDIN, imageIcon);
+                        }
+                    });
+                } else if (position == SERVICE_FACEBOOK) {
+                    if (FACEBOOK_HAS_ACCESS_TOKEN) {
                         toggleService(SERVICE_FACEBOOK, imageIcon);
+                    } else {
+                        imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_facebook_grey));
                     }
-                });
-            } else if(position == SERVICE_GOOGLEPLUS) {
-                if (GOOGLEPLUS_HAS_ACCESS_TOKEN) {
-                    toggleService(SERVICE_GOOGLEPLUS, imageIcon);
-                } else {
-                    imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_googleplus_grey));
-                }
-                imageIcon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    imageIcon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toggleService(SERVICE_FACEBOOK, imageIcon);
+                        }
+                    });
+                } else if (position == SERVICE_GOOGLEPLUS) {
+                    if (GOOGLEPLUS_HAS_ACCESS_TOKEN) {
                         toggleService(SERVICE_GOOGLEPLUS, imageIcon);
+                    } else {
+                        imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_googleplus_grey));
                     }
-                });
-            } else if(position == SERVICE_TWITTER) {
-                if (TWITTER_HAS_ACCESS_TOKEN) {
-                    toggleService(SERVICE_TWITTER, imageIcon);
-                } else {
-                    imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_twitter_grey));
-                }
-                imageIcon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    imageIcon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toggleService(SERVICE_GOOGLEPLUS, imageIcon);
+                        }
+                    });
+                } else if (position == SERVICE_TWITTER) {
+                    if (TWITTER_HAS_ACCESS_TOKEN) {
                         toggleService(SERVICE_TWITTER, imageIcon);
+                    } else {
+                        imageIcon.setImageDrawable(getResources().getDrawable(R.drawable.logo_twitter_grey));
                     }
-                });
+                    imageIcon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toggleService(SERVICE_TWITTER, imageIcon);
+                        }
+                    });
+                }
+
+                linearLayoutCreateCommentIcons.addView(imageIcon);
             }
 
-            linearLayoutCreateCommentIcons.addView(imageIcon);
-        }
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            String type = intent.getType();
 
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
-
-        if(Intent.ACTION_SEND.equals(action) && type != null) {
-            if(type.equals("text/plain")) {
-                editTextComment.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+                if (type.equals("text/plain")) {
+                    editTextComment.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+                }
             }
+        } else {
+            LinearLayout linearLayoutCreateComment = (LinearLayout) findViewById(R.id.LinearLayout_CreateComment);
+            linearLayoutCreateComment.setVisibility(View.GONE);
+
+            Button buttonToSettings = (Button) findViewById(R.id.Button_ToSettingsCreateComment);
+            buttonToSettings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToSettingsPage();
+                }
+            });
         }
     }
 
