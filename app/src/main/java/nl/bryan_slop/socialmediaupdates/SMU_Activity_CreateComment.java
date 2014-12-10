@@ -27,6 +27,7 @@ public class SMU_Activity_CreateComment extends SMU_Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_comment);
 
+        EditText editTextComment = (EditText) findViewById(R.id.EditView_CreateComment);
         final String[] socialMediaServices = getResources().getStringArray(R.array.social_media_services);
 
         for(int position = 0; position < socialMediaServices.length; position++) {
@@ -95,6 +96,15 @@ public class SMU_Activity_CreateComment extends SMU_Activity {
             linearLayoutCreateCommentIcons.addView(imageIcon);
         }
 
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if(Intent.ACTION_SEND.equals(action) && type != null) {
+            if(type.equals("text/plain")) {
+                editTextComment.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+            }
+        }
     }
 
     @Override
