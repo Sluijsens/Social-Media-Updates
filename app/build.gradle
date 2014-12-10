@@ -8,8 +8,8 @@ android {
         applicationId "nl.bryan_slop.socialmediaupdates"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 2
-        versionName "0.2"
+        versionCode 3
+        versionName "0.3"
     }
     buildTypes {
         release {
@@ -30,12 +30,12 @@ android {
             versionNameSuffix "-debug"
         }
     }
-    productFlavors {
+//    productFlavors {
 //        debug {
 //            applicationId "com.buildsystemexample.app.debug"
 //            versionName "0.2-debug"
 //        }
-    }
+//    }
 }
 
 dependencies {
